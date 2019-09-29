@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Numerics;
 
 
 namespace KRIP2_LAB1
@@ -59,18 +60,18 @@ namespace KRIP2_LAB1
             int j = 0;
             for(int i = 0; i < div.Count; i++)
             {
-                if (x % 3 == 0)
+                if (x % 2 == 0)
                 {
-                    for (j = 0; j < x; j += 3)
+                    for (j = 0; j < x; j += 2)
                     {
-                        mul = (mul * Math.Pow(div[i], 3)) % p;
+                        mul = (mul * Math.Pow(div[i], 2)) % p;
                     }
                 }
                 else
                 {
-                    for (j = 0; j < (x - 3); j += 3)
+                    for (j = 0; j < (x - 2); j += 2)
                     {
-                        mul = (mul * Math.Pow(div[i], 3)) % p;
+                        mul = (mul * Math.Pow(div[i], 2)) % p;
                     }
                     mul = (mul * div[i]) % p;
                 }
@@ -82,10 +83,10 @@ namespace KRIP2_LAB1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            int a = Convert.ToInt32(textBox5.Text);
-            int b = Convert.ToInt32(textBox4.Text);
+            BigInteger a = BigInteger.Parse(textBox5.Text);
+            BigInteger b = BigInteger.Parse(textBox4.Text);
 
-            int ost = a, ost_2 = 0, mul = 1, a1 = a, b1 = b;
+            BigInteger ost = a, ost_2 = 0, mul = 1, a1 = a, b1 = b;
             while (ost != 0)
             {
                 mul = 1;
@@ -115,18 +116,18 @@ namespace KRIP2_LAB1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            int[] U = new int[2];
-            int[] V = new int[2];
-            int[] T = new int[2];
-            int q = 0;
-            int a = Convert.ToInt32(textBox6.Text);
-            int b = Convert.ToInt32(textBox7.Text);
+            BigInteger[] U = new BigInteger[2];
+            BigInteger[] V = new BigInteger[2];
+            BigInteger[] T = new BigInteger[2];
+            BigInteger q = 0;
+            BigInteger a = BigInteger.Parse(textBox6.Text);
+            BigInteger b = BigInteger.Parse(textBox7.Text);
             U[0] = a;
             U[1] = 0;
             V[0] = b;
             V[1] = 1;
 
-            int ost = a, ost_2 = 0, mul = 1, a1 = a, b1 = b;
+            BigInteger ost = a, ost_2 = 0, mul = 1, a1 = a, b1 = b;
             while (ost != 0)
             {
                 mul = 1;
@@ -157,7 +158,7 @@ namespace KRIP2_LAB1
             }
             else
             {
-                int inversion = 0;
+                BigInteger inversion = 0;
                 while (V[0] != 0)
                 {
                     inversion = T[1];
