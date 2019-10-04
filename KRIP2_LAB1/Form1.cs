@@ -21,73 +21,55 @@ namespace KRIP2_LAB1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            double a = Double.Parse(textBox3.Text), x = Double.Parse(textBox2.Text), p = Double.Parse(textBox1.Text), rezult = 0;
-            double divider = 2;
-               
-            List<double> div = new List<double>();
-            while ((a % divider) == 0)
-            {
-                a = a / divider;
-                div.Add(divider);
-                //div[numb] = divider;
-               // numb++;
-            }
+            BigInteger a = BigInteger.Parse(textBox3.Text), p = BigInteger.Parse(textBox1.Text), x = BigInteger.Parse(textBox2.Text);
+            //       double divider = 2;
+          //  double x = Double.Parse(textBox2.Text);
 
-            divider = 3;
-            int c = (int)Math.Sqrt(a) + 1;
+          //  char[] strArr = String_a.ToCharArray();
+     //       StringBuilder sb = new StringBuilder();
 
-            while(divider < c)
-            {
-                if ((a % divider) == 0)
-                {
-                    if (a / divider * divider - a == 0)
-                    {
-                        div.Add(divider);
-                        // div[numb] = divider;
-                        // numb++;
-                        a = a / divider;
-                        c = (int)Math.Sqrt(a) + 1;
-                    }
-                    else
-                        divider += 2;
-                }
-                else
-                    divider += 2;
-            }
 
-            div.Add(a);
-            double mul = 1;
-            int j = 0;
-            for(int i = 0; i < div.Count; i++)
+            string BinaryValue = null;
+            BigInteger x1 = 0;
+            while (x > 0)
             {
-                if (x % 2 == 0)
-                {
-                    for (j = 0; j < x; j += 2)
-                    {
-                        mul = (mul * Math.Pow(div[i], 2)) % p;
-                    }
-                }
-                else
-                {
-                    for (j = 0; j < (x - 2); j += 2)
-                    {
-                        mul = (mul * Math.Pow(div[i], 2)) % p;
-                    }
-                    mul = (mul * div[i]) % p;
-                }
-                    
+                
+                x1 = x % 2;
+                if (x == 0)
+                    break;
+                BinaryValue = BinaryValue + x1.ToString();
+                x /= 2;
+            //    x = Math.Truncate(x);
             }
-                // rezult = Math.Pow(a, x) % p;          
-                textBox8.Text = mul.ToString();
+           
+            int n = BinaryValue.Length;
+
+            BigInteger y = 1, s = a;
+            for(int i = 0; i < n; i++)
+            {
+                if(BinaryValue[i] == '1')
+                {
+                    y = (y * s) % p;
+                }
+                s = (s % p * s % p) % p;
+            }      
+                textBox8.Text = y.ToString();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             BigInteger a = BigInteger.Parse(textBox5.Text);
             BigInteger b = BigInteger.Parse(textBox4.Text);
-
-            BigInteger ost = a, ost_2 = 0, mul = 1, a1 = a, b1 = b;
-            while (ost != 0)
+            BigInteger ost = 0, ost_2 = 0, mul = 1, a1 = 0, b1 = 0;
+            if (b < a)
+            {
+                ost = a; ost_2 = 0; mul = 1; a1 = a; b1 = b;
+            }
+            else
+            {
+                ost = b; ost_2 = 0; mul = 1; a1 = b; b1 = a;
+            }
+                while (ost != 0)
             {
                 mul = 1;
                 if (b1 * 2 < a1)
@@ -122,12 +104,24 @@ namespace KRIP2_LAB1
             BigInteger q = 0;
             BigInteger a = BigInteger.Parse(textBox6.Text);
             BigInteger b = BigInteger.Parse(textBox7.Text);
-            U[0] = a;
-            U[1] = 0;
-            V[0] = b;
-            V[1] = 1;
-
-            BigInteger ost = a, ost_2 = 0, mul = 1, a1 = a, b1 = b;
+            BigInteger ost = 0, ost_2 = 0, mul = 0, a1 = 0, b1 = 0;
+            if (a > b)
+            {
+                U[0] = a;
+                U[1] = 0;
+                V[0] = b;
+                V[1] = 1;
+                ost = a; ost_2 = 0; mul = 1; a1 = a; b1 = b;
+            }
+            else
+            {
+                U[0] = b;
+                U[1] = 0;
+                V[0] = a;
+                V[1] = 1;
+                ost = b; ost_2 = 0; mul = 1; a1 = b; b1 = a;
+            }
+            
             while (ost != 0)
             {
                 mul = 1;
