@@ -105,20 +105,16 @@ namespace KRIP2_LAB1
             BigInteger a = BigInteger.Parse(textBox6.Text);
             BigInteger b = BigInteger.Parse(textBox7.Text);
             BigInteger ost = 0, ost_2 = 0, mul = 0, a1 = 0, b1 = 0;
+            U[0] = a;
+            U[1] = 0;
+            V[0] = b;
+            V[1] = 1;
             if (a > b)
             {
-                U[0] = a;
-                U[1] = 0;
-                V[0] = b;
-                V[1] = 1;
                 ost = a; ost_2 = 0; mul = 1; a1 = a; b1 = b;
             }
             else
             {
-                U[0] = b;
-                U[1] = 0;
-                V[0] = a;
-                V[1] = 1;
                 ost = b; ost_2 = 0; mul = 1; a1 = b; b1 = a;
             }
             
